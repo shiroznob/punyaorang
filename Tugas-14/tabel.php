@@ -145,7 +145,7 @@
                             <td><?=$no++?></td>
                             <td><?=$data['Nama']?></td>
                             <td><?=$data['Jumlah']?></td>
-                            <td><a href="update.php?kode=$data['Nama']">Ubah</a></td>
+                            <td><a href="update.php?kode=$data['ID']">Ubah</a></td>
                         </tr>
             <?php
                     }
