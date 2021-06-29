@@ -99,10 +99,9 @@
             <h1>Pembelian Tiket</h1>
             <?php
                 include "database.php";
-                $id = $_GET['ID'];
+                $id = isset($_GET['ID']) ? $_GET['ID'] : '';
                 $sql = mysqli_query($koneksi, "SELECT*FROM pembelian WHERE ID='$id'");
                 $no = 1;
-                while($data=mysqli_fetch_array($sql)) {
             ?>
             <form action="hasilform.php" method="post" class="form" >
                 <table>
@@ -123,9 +122,6 @@
                     </tr>
                 </table>
             </form>
-            <?php
-                }
-            ?>
         </div>
     </div>
 </body>
