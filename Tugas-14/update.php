@@ -99,20 +99,31 @@
             <h1>Pembelian Tiket</h1>
             <?php
                 include "database.php";
-                $id = isset($_GET['ID']) ? $_GET['ID'] : '';
+                $id = $_GET['kode'];
                 $sql = mysqli_query($koneksi, "SELECT*FROM pembelian WHERE ID='$id'");
                 $no = 1;
+                $data = mysqli_fetch_array($sql);
             ?>
             <form action="hasilform.php" method="post" class="form" >
                 <table>
                     <tr>
                         <td>
-                            <input class="nama" type="text" name="Nama" maxlength="50" size="20" value="<?php echo $data['Nama'];?>">
+                            <input class="nama"
+                            type="text"
+                            name="Nama"
+                            maxlength="50"
+                            size="20"
+                            value="<?php echo $data['Nama'];?>">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input class="jumlah" type="number" name="Jumlah" maxlength="50" size="20" value="<?php echo $data['Jumlah'];?>">
+                            <input class="jumlah"
+                            type="number"
+                            name="Jumlah"
+                            maxlength="50"
+                            size="20"
+                            value="<?php echo $data['Jumlah'];?>">
                         </td>
                     </tr>
                     <tr>
