@@ -90,14 +90,13 @@
         <div class="formtable">
             <?php
                 if(isset($_POST["submit"])) {
-                    $id = $_GET["ID"];
+                    $id = $_POST["id"];
                     $nama = $_POST["Nama"];
                     $jumlah = $_POST["Jumlah"];
 
                     require('database.php');
-                    $sql = "UPDATE pembelian SET Nama='$nama', Jumlah='$jumlah' WHERE ID='$id'";
+                    $sql = "UPDATE pembelian SET Nama='$nama', Jumlah='$jumlah' WHERE id='$id'";
                     $query = mysqli_query($koneksi, $sql);
-                    // !query kalo gagal, query kalo berhasil
                     if ($query) {
             ?>
                     <div class="berhasil">
