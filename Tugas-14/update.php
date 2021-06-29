@@ -104,7 +104,8 @@
                 $no = 1;
                 $data = mysqli_fetch_array($sql);
             ?>
-            <form action="hasilform.php" method="post" class="form" >
+            <form action="prosesUpdate.php" method="post" class="form" >
+                <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
                 <table>
                     <tr>
                         <td>

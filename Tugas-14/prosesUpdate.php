@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabel Pembelian</title>
+    <title>Hasil Form</title>
 </head>
 <body>
     <style>
@@ -38,7 +38,7 @@
             align-items: center;
             justify-content: center;
             /* buat ngasi spasi */
-            gap: 20px;
+            gap: 60px;
             border-radius: 20px;
             backdrop-filter: blur(4px);
             background-color: rgba(85, 85, 85, 0.5);
@@ -48,55 +48,18 @@
             left: 420px;
             bottom: 50px;
         }
-        h1 {
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-        button {
-            display: flex;
-            width: 50%;
-            background-color: #97191D; 
-            border: none;
-            color: white;
-            padding: 10px 27px;
-            margin: 4px 2px;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-        }
         .pusat {
             padding: 0;
             margin: 0;
             place-items: center; 
             row-gap: 30px;
         }
-        table { 
-            border-collapse:collapse;
-            border-spacing:0;     
-            font-size:16px;
-            }
-
-        table th {
-            font-weight:bold;
-            padding:10px;
-            color:#fff;
-            background-color:#2A72BA;
-            border-top:1px black solid;
-            border-bottom:1px black solid;
-            }
-        table td {
-            padding:10px;
-            border-top: 1px black solid;
-            border-bottom: 1px black solid;
-            text-align: center;
-            }         
-        table tr {
-            background-color: #DFEBF8;
-            }
-        div {
-            font-family:Arial, sans-serif;
-            padding: 20px;
+        .berhasil {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
         }
         button {
             display: flex;
@@ -126,37 +89,41 @@
         </div>
         <div class="formtable">
             <?php
-                require("database.php");
-                $sql = "SELECT ID, Nama, Jumlah FROM pembelian";
-                $query = mysqli_query($koneksi,$sql);
-                ?>
-                    <table border="1">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jumlah</th>
-                            <th>Action</th>
-                        </tr>
-            <?php		
-                        $no = 1;
-                        while($data = mysqli_fetch_array($query)) {
-                            // print_r($data);
+                if(isset($_POST["submit"])) {
+                    $id = $_GET["ID"];
+                    $nama = $_POST["Nama"];
+                    $jumlah = $_POST["Jumlah"];
+
+                    require('database.php');
+                    $sql = "UPDATE pembelian SET Nama='$nama', Jumlah='$jumlah' WHERE ID='$id'";
+                    $query = mysqli_query($koneksi, $sql);
+                    // !query kalo gagal, query kalo berhasil
+                    if ($query) {
             ?>
-                        <tr>
-                            <td><?=$no++?></td>
-                            <td><?=$data['Nama']?></td>
-                            <td><?=$data['Jumlah']?></td>
-                            <td><a href="update.php?kode=<?=$data['ID']?>">Ubah</a></td>
-                        </tr>
-            <?php
-                    }
-            ?>
-                    </table>
+                    <div class="berhasil">
+                        <h2>Terimakasih</h2>
+                        <h2><?php echo $nama;?></h2>
+                    </div>
                     <div class="link">
                         <button>
-                            <a href="form.html">Beli Tiket</a>
+                            <a href="tabel.php">Lihat Daftar Pembelian</a>
                         </button>
                     </div>
+            <?php
+                    } else {
+            ?>
+                    <div class="berhasil">
+                        <h2>Pembelian Gagal</h2>
+                    </div>
+                    <div class="link">
+                        <button>
+                            <a href="form.html">Kembali ke form Pembelian Tiket</a>
+                        </button>
+                    </div>
+            <?php
+                    }
+                }
+            ?>
         </div>
     </div>
 </body>
